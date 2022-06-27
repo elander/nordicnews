@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+
+import { NewsapiService } from '../newsapi.service';
 
 @Component({
   selector: 'app-science',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScienceComponent implements OnInit {
 
-  constructor() { }
+  constructor(public api: NewsapiService) { }
 
   ngOnInit(): void {
+    console.log('hejsan')
   }
 
 }

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { NewsapiService } from '../newsapi.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-entertainment',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntertainmentComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private api: NewsapiService) { }
+  subscription = new Subscription;
+  enterdata: any[] = [];
   ngOnInit(): void {
+    this.subscription = this.api.enterHeadlines().subscribe(
+      result => {
+        console.log(result);
+        this.enterdata = result.articles;
+      }
+    )
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }
